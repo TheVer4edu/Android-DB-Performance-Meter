@@ -5,6 +5,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id("com.google.devtools.ksp")
+    id("io.realm.kotlin")
 }
 
 val flavorList = listOf(
@@ -24,7 +25,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+//        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -42,6 +43,12 @@ android {
     }
     kotlinOptions {
         jvmTarget = "17"
+    }
+
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class.java).configureEach {
+        kotlinOptions {
+            jvmTarget = "17"
+        }
     }
 
     buildFeatures {
@@ -91,16 +98,19 @@ dependencies {
 
     implementation("io.github.serpro69:kotlin-faker:1.6.0")
 
-    // Room
-    val room_version = "2.5.0"
+    implementation(kotlin("reflect"))
 
-    add("roomImplementation", "androidx.room:room-runtime:$room_version")
-    add("roomImplementation", "androidx.room:room-ktx:$room_version")
+    // Room
+    val roomVersion = "2.5.0"
+
+    add("roomImplementation", "androidx.room:room-runtime:$roomVersion")
+    add("roomImplementation", "androidx.room:room-ktx:$roomVersion")
 
     gradle.startParameter.taskNames.any { it.lowercase().contains("room") }.ifTrue {
-        add("ksp", "androidx.room:room-compiler:$room_version")
+        add("ksp", "androidx.room:room-compiler:$roomVersion")
     }
 
     // Realm
-
+    val realmVersion = "1.11.0"
+    add("realmImplementation", "io.realm.kotlin:library-base:$realmVersion")
 }
