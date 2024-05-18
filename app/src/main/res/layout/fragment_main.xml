@@ -14,13 +14,22 @@
         app:layout_constraintTop_toTopOf="parent"
         app:title="@string/app_name" />
 
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/experiment_progress"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"/>
+
     <TextView
         android:id="@+id/text_elapsed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@id/experiment_progress" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/experiment_dimension"
@@ -71,15 +80,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         tools:listitem="@layout/experiment_item"/>
 
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:id="@+id/experiment_progress"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:visibility="gone"
-        tools:visibility="visible"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

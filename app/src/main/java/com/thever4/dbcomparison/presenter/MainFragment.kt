@@ -37,8 +37,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     private val experimentObserver = Observer<ExperimentState> {
         when (it) {
             is ExperimentState.Running -> {
-                adapter.submitList(it.list)
-                adapter.notifyDataSetChanged()
+                adapter.submitList(it.list.toList())
             }
 
             is ExperimentState.Success -> {
@@ -61,7 +60,10 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     }
 
     private fun showLoad(isLoading: Boolean) {
-        binding.experimentProgress.visibility = if (isLoading) View.VISIBLE else View.GONE
+        if (isLoading)
+            binding.experimentProgress.show()
+        else
+            binding.experimentProgress.hide()
     }
 
     private fun enableControls(enabled: Boolean) {
