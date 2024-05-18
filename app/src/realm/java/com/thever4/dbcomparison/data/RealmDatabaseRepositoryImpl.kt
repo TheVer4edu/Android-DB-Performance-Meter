@@ -16,14 +16,6 @@ class RealmDatabaseRepositoryImpl @Inject constructor(
     private val realm: Realm,
 ) : DatabaseRepository {
 
-    private val fields = mapOf(
-        SampleItem.Field.ID to "id",
-        SampleItem.Field.NAME to "name",
-        SampleItem.Field.DATE to "date",
-        SampleItem.Field.DOZE to "doze",
-        SampleItem.Field.ACTIVE to "active",
-    )
-
     override suspend fun addItem(item: SampleItem): Unit = withContext(Dispatchers.IO) {
         realm.write {
             val realmSampleItem = RealmSampleItem.fromSampleItem(item)
@@ -81,7 +73,7 @@ class RealmDatabaseRepositoryImpl @Inject constructor(
     ): List<SampleItem> = withContext(Dispatchers.IO) {
         realm.query<RealmSampleItem>()
             .sort(
-                property = if (field != SampleItem.Field.DATE) requireNotNull(fields[field]) else "_realmInstant",
+                property = if (field != SampleItem.Field.DATE) requireNotNull(field.fieldName) else "_realmInstant",
                 sortOrder = if (descending) Sort.DESCENDING else Sort.ASCENDING,
             )
             .find()
@@ -96,7 +88,7 @@ class RealmDatabaseRepositoryImpl @Inject constructor(
                 ).find()
             else
                 realm.query<RealmSampleItem>(
-                    query = "${fields[field]} == $0",
+                    query = "${field.fieldName} == $0",
                     value
                 ).find()
         }

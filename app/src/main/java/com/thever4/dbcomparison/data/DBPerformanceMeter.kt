@@ -1,8 +1,7 @@
 package com.thever4.dbcomparison.data
 
-import androidx.annotation.PluralsRes
-import androidx.annotation.StringRes
 import com.thever4.dbcomparison.R
+import com.thever4.dbcomparison.data.model.Experiment
 import com.thever4.dbcomparison.data.model.SampleItem
 import java.util.Date
 import javax.inject.Inject
@@ -126,13 +125,6 @@ class DBPerformanceMeter @Inject constructor(
             repository.addItems(sampleData)
         }
     }
-
-    data class Experiment(
-        val action: suspend () -> Long,
-        @[StringRes PluralsRes]
-        val description: Int,
-        val params: List<Any> = emptyList()
-    )
 
     val experiments
         get() = listOf(

@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.thever4.dbcomparison.R
+import com.thever4.dbcomparison.data.model.ExperimentItem
 import com.thever4.dbcomparison.databinding.ExperimentItemBinding
 
 class ExperimentAdapter :
