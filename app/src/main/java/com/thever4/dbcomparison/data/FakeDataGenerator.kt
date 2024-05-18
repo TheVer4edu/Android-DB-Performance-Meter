@@ -14,6 +14,6 @@ object FakeDataGenerator {
         }
     }
 
-    fun getFakeName(): String = faker?.name?.nameWithMiddle() ?: ""
+    fun getFakeName(): String = faker?.name?.nameWithMiddle() ?: "FAKE_NAME_ERROR"
 
 }

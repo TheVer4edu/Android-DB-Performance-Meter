@@ -9,7 +9,11 @@ open class SampleItem(
     open val active: Boolean = false,
     open val doze: Double = Double.NaN,
 ) {
-    enum class Field {
-        ID, NAME, DATE, ACTIVE, DOZE;
+    enum class Field(val fieldName: String) {
+        ID("id"),
+        NAME("name"),
+        DATE("date"),
+        ACTIVE("active"),
+        DOZE("doze");
     }
 }
