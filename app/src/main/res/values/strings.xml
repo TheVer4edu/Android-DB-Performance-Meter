@@ -1,0 +1,55 @@
+<resources>
+    <string name="app_name">DBcomparison</string>
+
+    <string name="rows_count">Кол-во строк</string>
+    <string name="run_experiment_button">Запуск экспериментов</string>
+
+    <string name="measure_app_launch_time">Elapsed to launch app: %1$dms.</string>
+
+    <string name="measure_open_connection">Измерение открытия соединения</string>
+
+    <plurals name="measure_select_all">
+        <item quantity="one">Измерение запроса всех данных (%1$d строка)</item>
+        <item quantity="few">Измерение запроса всех данных (%1$d строки)</item>
+        <item quantity="other">Измерение запроса всех данных (%1$d строк)</item>
+    </plurals>
+
+    <string name="measure_select_by_int">Измерение запроса по типу Integer</string>
+    <string name="measure_select_by_string">Измерение запроса по типу String</string>
+    <string name="measure_select_by_boolean">Измерение запроса по типу Boolean</string>
+    <string name="measure_select_by_date">Измерение запроса по типу Date</string>
+    <string name="measure_select_by_float">Измерение запроса по типу Float</string>
+
+    <string name="measure_sorting_by_int">Измерение сортировки по типу Integer</string>
+    <string name="measure_sorting_by_string">Измерение сортировки по типу String</string>
+    <string name="measure_sorting_by_boolean">Измерение сортировки по типу Boolean</string>
+    <string name="measure_sorting_by_date">Измерение сортировки по типу Date</string>
+    <string name="measure_sorting_by_float">Измерение сортировки по типу Float</string>
+
+    <string name="measure_sorting_by_int_desc">Измерение обратной сортировки по типу Integer</string>
+    <string name="measure_sorting_by_string_desc">Измерение обратной сортировки по типу String</string>
+    <string name="measure_sorting_by_boolean_desc">Измерение обратной сортировки по типу Boolean</string>
+    <string name="measure_sorting_by_date_desc">Измерение обратной сортировки по типу Date</string>
+    <string name="measure_sorting_by_float_desc">Измерение обратной сортировки по типу Float</string>
+
+    <string name="measure_clearing">Измерение безусловной очистки</string>
+
+    <plurals name="measure_insert_all">
+        <item quantity="one">Измерение вставки данных (%1$d строка)</item>
+        <item quantity="few">Измерение вставки  данных (%1$d строки)</item>
+        <item quantity="other">Измерение вставки данных (%1$d строк)</item>
+    </plurals>
+
+
+    <string name="elapsed_ms">%1$dms.</string>
+    <string-array name="possible_rows_count">
+        <item>1</item>
+        <item>10</item>
+        <item>100</item>
+        <item>1000</item>
+        <item>2000</item>
+        <item>5000</item>
+        <item>10000</item>
+        <item>20000</item>
+    </string-array>
+</resources>
