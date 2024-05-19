@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import com.thever4.dbcomparison.data.DatabaseRepository
 import com.thever4.dbcomparison.data.RoomDatabaseRepositoryImpl
+import com.thever4.dbcomparison.data.RoomStorageConfigImpl
+import com.thever4.dbcomparison.data.StorageConfig
 import com.thever4.dbcomparison.data.db.SampleRoomDatabase
 import dagger.Binds
 import dagger.Module
@@ -15,6 +17,9 @@ interface FlavorModule {
 
     @Binds
     fun bindDatabaseRepository(roomRepo: RoomDatabaseRepositoryImpl): DatabaseRepository
+
+    @Binds
+    fun bindStorageConfig(config: RoomStorageConfigImpl): StorageConfig
 
     companion object {
 

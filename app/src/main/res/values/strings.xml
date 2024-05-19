@@ -40,8 +40,18 @@
         <item quantity="other">Измерение вставки данных (%1$d строк)</item>
     </plurals>
 
+    <plurals name="measure_db_file_size">
+        <item quantity="one">Размер файла величиной в %1$d строку</item>
+        <item quantity="few">Размер файла величиной в %1$d строки</item>
+        <item quantity="other">Размер файла величиной в %1$d строк</item>
+    </plurals>
+
+    <string name="measure_db_file_size_empty">Размер пустого файла БД</string>
+
 
     <string name="elapsed_ms">%1$dms.</string>
+    <string name="size_bytes">%1$d bytes.</string>
+
     <string-array name="possible_rows_count">
         <item>1</item>
         <item>10</item>

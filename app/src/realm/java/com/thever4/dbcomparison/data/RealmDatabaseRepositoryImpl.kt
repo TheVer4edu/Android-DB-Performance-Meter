@@ -62,7 +62,7 @@ class RealmDatabaseRepositoryImpl @Inject constructor(
     }
 
     override suspend fun clearTable() = withContext(Dispatchers.IO) {
-        realm.write {
+        realm.writeBlocking {
             deleteAll()
         }
     }

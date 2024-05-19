@@ -27,7 +27,8 @@ class MainViewModel @Inject constructor(
                 ExperimentItem(
                     description = it.description,
                     arguments = it.params,
-                    elapsed = it.action()
+                    elapsed = it.action(),
+                    unit = it.measurementUnit.stringId
                 )
             }.await().also {
                 resultList.add(it)

@@ -1,8 +1,11 @@
 package com.thever4.dbcomparison.data
 
+import android.util.Log
 import com.thever4.dbcomparison.R
 import com.thever4.dbcomparison.data.model.Experiment
 import com.thever4.dbcomparison.data.model.SampleItem
+import kotlinx.coroutines.delay
+import java.io.File
 import java.util.Date
 import javax.inject.Inject
 import kotlin.random.Random
@@ -10,6 +13,7 @@ import kotlin.system.measureTimeMillis
 
 class DBPerformanceMeter @Inject constructor(
     private val repository: DatabaseRepository,
+    private val config: StorageConfig,
 ) {
 
     var rowsCount = DEFAULT_DIMENSION
@@ -126,12 +130,27 @@ class DBPerformanceMeter @Inject constructor(
         }
     }
 
-    val experiments
-        get() = listOf(
+    private suspend fun measureDbFileSizeInBytes(): Long {
+        clearTable()
+        generateData2K()
+        val dbFile = config.fileStorageLocation?.let { File(it) } ?: return -1
+        Log.d("FILEPATH", config.fileStorageLocation.toString())
+        return dbFile.length()
+    }
+
+    private suspend fun measureEmptyDbFileSizeInBytes(): Long {
+        clearTable()
+        val dbFile = config.fileStorageLocation?.let { File(it) } ?: return -1
+        Log.d("FILEPATH", config.fileStorageLocation.toString())
+        return dbFile.length()
+    }
+
+    val experiments: List<Experiment>
+        get() = mutableListOf(
             Experiment(::openConnection, R.string.measure_open_connection),
-            Experiment(::measureInsertRandomData, R.plurals.measure_insert_all, listOf(rowsCount)),
+            Experiment(::measureInsertRandomData, R.plurals.measure_insert_all, Experiment.MeasurementUnit.MS, listOf(rowsCount)),
             Experiment(::measureClear, R.string.measure_clearing),
-            Experiment(::measureSelectAll, R.plurals.measure_select_all, listOf(rowsCount)),
+            Experiment(::measureSelectAll, R.plurals.measure_select_all, Experiment.MeasurementUnit.MS, listOf(rowsCount)),
             Experiment(::measureConditionalSelectByInt, R.string.measure_select_by_int),
             Experiment(::measureConditionalSelectByString, R.string.measure_select_by_string),
             Experiment(::measureConditionalSelectByBoolean, R.string.measure_select_by_boolean),
@@ -150,7 +169,25 @@ class DBPerformanceMeter @Inject constructor(
             ),
             Experiment(::measureSortingSelectByDateDesc, R.string.measure_sorting_by_date_desc),
             Experiment(::measureSortingSelectByFloatDesc, R.string.measure_sorting_by_float_desc),
-        )
+        ).apply {
+            if (config.isFileStorage) {
+                add(
+                    Experiment(
+                        ::measureEmptyDbFileSizeInBytes,
+                        R.string.measure_db_file_size_empty,
+                        Experiment.MeasurementUnit.BYTES
+                    )
+                )
+                add(
+                    Experiment(
+                        ::measureDbFileSizeInBytes,
+                        R.plurals.measure_db_file_size,
+                        Experiment.MeasurementUnit.BYTES,
+                        listOf(rowsCount)
+                    )
+                )
+            }
+        }
 
     companion object {
         const val DEFAULT_DIMENSION = 2000

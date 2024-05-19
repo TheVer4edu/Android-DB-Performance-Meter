@@ -23,7 +23,7 @@ class ExperimentAdapter :
                 "plurals" -> context.resources.getQuantityString(item.description, item.arguments.first() as Int, *item.arguments.toTypedArray())
                 else -> context.getString(item.description)
             }
-            experimentElapsed.text = context.getString(R.string.elapsed_ms, item.elapsed)
+            experimentElapsed.text = context.getString(item.unit, item.elapsed)
         }
 
     }

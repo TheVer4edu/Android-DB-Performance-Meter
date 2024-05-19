@@ -2,6 +2,8 @@ package com.thever4.dbcomparison.di
 
 import com.thever4.dbcomparison.data.DatabaseRepository
 import com.thever4.dbcomparison.data.RealmDatabaseRepositoryImpl
+import com.thever4.dbcomparison.data.RealmStorageConfigImpl
+import com.thever4.dbcomparison.data.StorageConfig
 import com.thever4.dbcomparison.data.model.RealmSampleItem
 import dagger.Binds
 import dagger.Module
@@ -15,6 +17,9 @@ interface FlavorModule {
 
     @Binds
     fun bindDatabaseRepository(roomRepo: RealmDatabaseRepositoryImpl): DatabaseRepository
+
+    @Binds
+    fun bindStorageConfig(config: RealmStorageConfigImpl): StorageConfig
 
     companion object {
 

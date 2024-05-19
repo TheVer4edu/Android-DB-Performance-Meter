@@ -8,4 +8,6 @@ data class ExperimentItem(
     val description: Int,
     val arguments: List<Any>,
     val elapsed: Long,
+    @StringRes
+    val unit: Int,
 ) // recyclerview item
